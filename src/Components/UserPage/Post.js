@@ -1,0 +1,75 @@
+import React from 'react';
+import {useState, useEffect} from 'react';
+
+const postStyle = {
+    width: '293px',
+    height: '293px',
+    marginLeft: '25px',
+    marginTop: '25px',
+    marginRight: 'auto',
+    position: 'relative',
+}
+
+const postImgStyle ={
+    width: '293px',
+    height: '293px',
+}
+
+const coverStyle = {
+    position: 'absolute',
+    zIndex: '3',
+    textAlign: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    width: '100%',
+    height: '100%',
+    bottom :'0',
+    visibility: 'hidden'
+}
+
+const coverVisibleStyle = {
+    position: 'absolute',
+    zIndex: '2',
+    textAlign: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    width: '100%',
+    height: '100%',
+    bottom :'0',
+}
+
+const coverTextStyle = {
+    fontFamily: 'Roboto',
+    color: 'white',
+    marginTop: '30%',
+}
+
+const Post = ({userid, post}) => {
+
+    const [shown, setIsShown] = useState(coverStyle);
+
+    const handleOnHover = () => {
+        setIsShown(coverVisibleStyle);
+    };
+
+    const handleHoverDown = () => {
+        setIsShown(coverStyle);
+    }
+
+    return(
+        <div style={postStyle}
+            key={post._id}
+                        onMouseEnter={handleOnHover}
+                        onMouseLeave={handleHoverDown}>
+                <img src={'http://localhost:3000/public/users/'+userid+'/posts/'+post._id+'.png'} alt="" srcset="" style={postImgStyle} />
+                <div style={shown}>
+                    <div>7
+                        <h3 style={coverTextStyle}>
+                            Like: {post.likes}
+                        </h3>
+                        
+                    </div>
+                </div>
+        </div>
+    );   
+}
+
+export default Post;

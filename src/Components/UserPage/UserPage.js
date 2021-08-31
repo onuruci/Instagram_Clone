@@ -78,7 +78,7 @@ const UserPage = ({currentUserId,setCurrentUserId,currentUserName,setCurrentUser
     const [followerCount, setFollowerCount] = useState(0);
     const [profilePhoto, setProfilePhoto] = useState(noprofile);
     const [profileName, setProfileName] = useState('http://localhost:3000/public/users/6120dff44095e24cacd44e52/profile/profile.png');
-    const [userid, setUserId] = useState('');
+    const [userid, setUserId] = useState('0');
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
@@ -140,7 +140,7 @@ const UserPage = ({currentUserId,setCurrentUserId,currentUserName,setCurrentUser
             currentUserName={currentUserName}/>
             <div style={bodyStyle}>
                 <div style={headStyle}>
-                    {userid !== '' ?  <img src={'http://localhost:3000/public/users/'+userid+'/profile/profile.png'} style={profileImageStyle} alt="" srcset="" /> :
+                    {userid !== '0' ?  <img src={'http://localhost:3000/public/users/'+userid+'/profile/profile.png'} style={profileImageStyle} alt={noprofile} srcset="" /> :
                     <img src={noprofile} style={profileImageStyle} alt="" srcset="" /> }
                     <div style={infoStyle}>
                         <div style={followStyle}>

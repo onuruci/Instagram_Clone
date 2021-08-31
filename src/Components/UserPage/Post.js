@@ -1,5 +1,6 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
+import noprofile from './noprofile.png';
 
 const postStyle = {
     width: '293px',
@@ -59,7 +60,7 @@ const Post = ({userid, post}) => {
             key={post._id}
                         onMouseEnter={handleOnHover}
                         onMouseLeave={handleHoverDown}>
-                <img src={'http://localhost:3000/public/users/'+userid+'/posts/'+post._id+'.png'} alt="" srcset="" style={postImgStyle} />
+                <img src={'http://localhost:3000/public/users/'+userid+'/posts/'+post._id+'.png'} alt={noprofile} srcset="" style={postImgStyle} />
                 <div style={shown}>
                     <div>7
                         <h3 style={coverTextStyle}>

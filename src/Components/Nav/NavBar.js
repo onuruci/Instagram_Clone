@@ -134,7 +134,9 @@ export default function NavBar({currentUserId, currentUserName}) {
             </div>
             <div className={classes.iconMenu}>
                 <HomeIcon fontSize="large" color="action" />
-                <AddIcon fontSize="large" color="action"></AddIcon>
+                <Link to="/postpicture">
+                  <AddIcon fontSize="large" color="action"></AddIcon>
+                </Link>
                 <Link to="/profile">
                 {currentUserId !== '' ? <img src={'http://localhost:3000/public/users/'+currentUserId+'/profile/profile.png'} alt="" srcset="" className={classes.profileIcon}/> : 
                 <img src={noprofile} alt="" srcset="" className={classes.profileIcon}/> }

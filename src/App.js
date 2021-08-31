@@ -7,6 +7,7 @@ import LogIn from "./Components/LogIn/LogIn";
 import HomePage from "./Components/HomePage/HomePage";
 import UserPage from "./Components/UserPage/UserPage";
 import ProfilePage from './Components/ProfilePage/ProfilePage';
+import PostPicture from './Components/PostPicture/PostPicture';
 
 import './index.css';
 
@@ -40,6 +41,9 @@ function App() {
         </Route>
         <Route exact path="/profile">
           <ProfilePage/>  
+        </Route>
+        <Route exact path="/postpicture">
+          <PostPicture/>  
         </Route>
       </Switch>
     </BrowserRouter>

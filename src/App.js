@@ -6,6 +6,7 @@ import SignUp from "./Components/SignUp/SignUp";
 import LogIn from "./Components/LogIn/LogIn";
 import HomePage from "./Components/HomePage/HomePage";
 import UserPage from "./Components/UserPage/UserPage";
+import ProfilePage from './Components/ProfilePage/ProfilePage';
 
 import './index.css';
 
@@ -36,6 +37,9 @@ function App() {
             currentUserName={currentUserName}
             setCurrentUserId={setCurrentUserId}
             setCurrentUserName={setCurrentUserName}/>
+        </Route>
+        <Route exact path="/profile">
+          <ProfilePage/>  
         </Route>
       </Switch>
     </BrowserRouter>

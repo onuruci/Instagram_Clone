@@ -1,6 +1,7 @@
 import React from 'react';
 
 import noprofile from './noprofile.png';
+import { Link } from "react-router-dom"; 
 
 import { alpha, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -134,9 +135,10 @@ export default function NavBar({currentUserId, currentUserName}) {
             <div className={classes.iconMenu}>
                 <HomeIcon fontSize="large" color="action" />
                 <AddIcon fontSize="large" color="action"></AddIcon>
+                <Link to="/profile">
                 {currentUserId !== '' ? <img src={'http://localhost:3000/public/users/'+currentUserId+'/profile/profile.png'} alt="" srcset="" className={classes.profileIcon}/> : 
                 <img src={noprofile} alt="" srcset="" className={classes.profileIcon}/> }
-                
+                </Link>                
             </div>
             
           </Toolbar>

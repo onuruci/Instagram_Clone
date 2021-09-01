@@ -118,7 +118,9 @@ export default function NavBar({currentUserId, currentUserName}) {
     <div className={classes.root}>
       <AppBar position="static" className={classes.bar}>
           <Toolbar>
-            <img src={instaLogo} alt="" srcset="" className={classes.logo}/>
+            <Link to="/home" className={classes.logo}>
+              <img src={instaLogo} alt="" srcset="" className={classes.logo}/>
+            </Link>
             <div className={classes.search}>
                 <div className={classes.searchIcon}>
                 <SearchIcon />
@@ -133,7 +135,9 @@ export default function NavBar({currentUserId, currentUserName}) {
                 />
             </div>
             <div className={classes.iconMenu}>
-                <HomeIcon fontSize="large" color="action" />
+                <Link to="/home">
+                  <HomeIcon fontSize="large" color="action" />
+                </Link>
                 <Link to="/postpicture">
                   <AddIcon fontSize="large" color="action"></AddIcon>
                 </Link>

@@ -8,6 +8,7 @@ import HomePage from "./Components/HomePage/HomePage";
 import UserPage from "./Components/UserPage/UserPage";
 import ProfilePage from './Components/ProfilePage/ProfilePage';
 import PostPicture from './Components/PostPicture/PostPicture';
+import ChangeProfile from './Components/ChangeProfile/ChangeProfile';
 
 import './index.css';
 
@@ -44,6 +45,9 @@ function App() {
         </Route>
         <Route exact path="/postpicture">
           <PostPicture/>  
+        </Route>
+        <Route exact path="/changeprofile">
+          <ChangeProfile/>  
         </Route>
       </Switch>
     </BrowserRouter>

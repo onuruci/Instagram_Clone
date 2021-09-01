@@ -1,7 +1,8 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
-import { Redirect, useParams } from "react-router-dom";
+import { Redirect, useParams, Link } from "react-router-dom";
 
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from '@material-ui/core/Button';
 import NavBar from '../Nav/NavBar';
 import Post from './Post';
@@ -82,6 +83,8 @@ const ProfilePage = () => {
     const [posts, setPosts] = useState([]);
     const [currentUserId, setCurrentUserId] = useState('');
     const [currentUserName, setCurrentUserName] = useState('');
+    const [renderChangeProfile, setRenderChangeProfile] = useState(0);
+    const [componentLoading, setComponentLoading] = useState(0);
 
     useEffect(() => {
         
@@ -127,13 +130,27 @@ const ProfilePage = () => {
             }
             else{
                 setAuth(1);
-                getUser();
+                getUser().then(() => {
+                    setComponentLoading(1);
+                });
             }
         }
         else {
             setAuth(0);
         }
     }, [token]);
+
+    const handleChangeProfile = () => {
+        setRenderChangeProfile(1);
+    };
+
+    if(componentLoading === 0){
+        return(
+            <div>
+                <CircularProgress />
+            </div>
+        );
+    }
 
     return(
         <div>
@@ -149,7 +166,7 @@ const ProfilePage = () => {
                             <h1 style={textStyle}>
                                 {profileName}
                             </h1>
-                            <Button variant="contained" color="primary" href="#contained-buttons" style={buttonStyle}>
+                            <Button variant="contained" color="primary" href="#contained-buttons" style={buttonStyle} onClick={handleChangeProfile}>
                                 Change Profile
                             </Button>
                         </div>
@@ -172,6 +189,7 @@ const ProfilePage = () => {
             </div>
             {auth === 1 ? null : <Redirect to='/'/>}
             {noUser === 0 ? null : <Redirect to='/home'/>}
+            {renderChangeProfile === 0 ? null : <Redirect to='/changeprofile'/>}
         </div>
     )
 }

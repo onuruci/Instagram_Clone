@@ -115,7 +115,6 @@ const ProfilePage = () => {
                 console.log(res.data.user.followers);
                 setFollowerCount(res.data.user.followers.length);
                 setFollowingCount(res.data.user.following.length);
-                setProfilePhoto('http://localhost:3000/public/users/' + '6120dff44095e24cacd44e52' + '/profile/profile.png');
                 setUserId(res.data.user._id);
                 setPosts(res.data.user.posts);
                 setCurrentUserId(res.data.authData.user._id);

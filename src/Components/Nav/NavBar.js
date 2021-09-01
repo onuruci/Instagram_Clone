@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import noprofile from './noprofile.png';
-import { Link } from "react-router-dom"; 
+import { Link } from "react-router-dom";
+import { Redirect} from "react-router-dom";
 
 import { alpha, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -72,7 +73,6 @@ const useStyles = makeStyles((theme) => ({
   searchIcon: {
     padding: theme.spacing(0, 2),
     height: '100%',
-    position: 'absolute',
     pointerEvents: 'none',
     display: 'flex',
     alignItems: 'center',
@@ -84,7 +84,7 @@ const useStyles = makeStyles((theme) => ({
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+    paddingLeft: `calc(1em + ${theme.spacing(-2)}px)`,
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('md')]: {
@@ -114,6 +114,18 @@ function HomeIcon(props) {
 export default function NavBar({currentUserId, currentUserName}) {
   const classes = useStyles();
 
+  const [searchName, setSearchName] = useState('');
+  const [searched, setSearched] = useState(0);
+ 
+  const handleSearchChange = (e) => {
+    setSearchName(e.target.value);
+  };
+
+  const handleSearch = () => {
+    console.log(searchName);
+    setSearched(1);
+  };
+
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.bar}>
@@ -122,8 +134,8 @@ export default function NavBar({currentUserId, currentUserName}) {
               <img src={instaLogo} alt="" srcset="" className={classes.logo}/>
             </Link>
             <div className={classes.search}>
-                <div className={classes.searchIcon}>
-                <SearchIcon />
+                <div  onClick={handleSearch}>
+                <SearchIcon onClick={handleSearch} className={classes.searchIcon}/>
                 </div>
                 <InputBase
                 placeholder="Search…"
@@ -132,6 +144,8 @@ export default function NavBar({currentUserId, currentUserName}) {
                     input: classes.inputInput,
                 }}
                 inputProps={{ 'aria-label': 'search' }}
+                value={searchName}
+                onChange={handleSearchChange}
                 />
             </div>
             <div className={classes.iconMenu}>
@@ -149,6 +163,7 @@ export default function NavBar({currentUserId, currentUserName}) {
             
           </Toolbar>
       </AppBar>
+      {searched === 0 ? null : <Redirect to={"/user/" + searchName} />}
     </div>
   );
 }

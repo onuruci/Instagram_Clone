@@ -6,6 +6,8 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import Circular from './Circular';
 
+import NavBar from '../Nav/NavBar';
+
 const axios = require('axios');
 
 const circularStyle = {
@@ -16,6 +18,13 @@ const circularStyle = {
     height: '100px'
 }
 
+const bodyStyle = {
+    width: '980px',
+    margin: '80px auto 0 auto',
+    minHeight: '1000px',
+    height: 'auto'
+}
+
 const HomePage = () => {
 
     const [connected, setConnected] = useState(0);
@@ -23,6 +32,7 @@ const HomePage = () => {
     const [auth, setAuth] = useState(1);
     const [err, setErr] = useState(0);
 
+    const [userid, setUserId] = useState('');
     const [username, setUsername] = useState('');
  
     useEffect(() => {
@@ -38,6 +48,7 @@ const HomePage = () => {
                 setErr(1);
             }
             else {
+                setUserId(res.data.authData.user._id);
                 setUsername(res.data.authData.user.username);
             }
             
@@ -71,23 +82,28 @@ const HomePage = () => {
     };
     return(
         <div>
-            {connected === 1 ? <div>
-                <h1>
-                    Hello
-                </h1>
-                <h1>
-                    Welcome to Homepage
-                </h1>
-                <h2>
-                    {username}
-                </h2>
-                <button onClick={handleClick}>
-                    AAA
-                </button>
-                <button onClick={handleLogout}>
-                    Log out
-                </button>
-            </div> : <CircularProgress style={circularStyle}/>}
+            <NavBar
+            currentUserId={userid}
+            currentUserName={username}/>
+            <div style={bodyStyle}>
+                {connected === 1 ? <div>
+                    <h1>
+                        Hello
+                    </h1>
+                    <h1>
+                        Welcome to Homepage
+                    </h1>
+                    <h2>
+                        {username}
+                    </h2>
+                    <button onClick={handleClick}>
+                        AAA
+                    </button>
+                    <button onClick={handleLogout}>
+                        Log out
+                    </button>
+                </div> : <CircularProgress style={circularStyle}/>}
+            </div>
             {auth === 1 ? null : <Redirect to='/'/>}
         </div>
     )

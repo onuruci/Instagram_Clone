@@ -7,6 +7,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Circular from './Circular';
 
 import NavBar from '../Nav/NavBar';
+import HomePost from './HomePost';
 
 const axios = require('axios');
 
@@ -88,13 +89,11 @@ const HomePage = () => {
             currentUserId={userid}
             currentUserName={username}/>
             <div style={bodyStyle}>
-                {connected === 1 ? <div>
+                {connected === 1 ? <div style={bodyStyle}>
                     {
                         arr.map(e => {
                             console.log(e);
-                            return <div key={e._id}>
-                                        <img src={"http://localhost:3000/public/users/"+e.owner+'/posts/'+e._id+'.png'} alt="" srcset="" />
-                                    </div>
+                            return <HomePost userid={e.owner} postid={e._id}/>
                         })
                     }
                 </div> : <CircularProgress style={circularStyle}/>}

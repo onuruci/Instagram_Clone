@@ -34,11 +34,12 @@ const HomePage = () => {
 
     const [userid, setUserId] = useState('');
     const [username, setUsername] = useState('');
+    const [arr, setArr] = useState([]);
  
     useEffect(() => {
         
         const getData = async () => {
-            let res = await axios.get('http://localhost:3000/main-page',{
+            let res = await axios.get('http://localhost:3000/homepage',{
                 'headers' : {
                     'Authorization': 'Bearer '+ localStorage.getItem('token')
                 }
@@ -50,6 +51,7 @@ const HomePage = () => {
             else {
                 setUserId(res.data.authData.user._id);
                 setUsername(res.data.authData.user.username);
+                setArr(res.data.arr);
             }
             
         }
@@ -87,21 +89,14 @@ const HomePage = () => {
             currentUserName={username}/>
             <div style={bodyStyle}>
                 {connected === 1 ? <div>
-                    <h1>
-                        Hello
-                    </h1>
-                    <h1>
-                        Welcome to Homepage
-                    </h1>
-                    <h2>
-                        {username}
-                    </h2>
-                    <button onClick={handleClick}>
-                        AAA
-                    </button>
-                    <button onClick={handleLogout}>
-                        Log out
-                    </button>
+                    {
+                        arr.map(e => {
+                            console.log(e);
+                            return <div key={e._id}>
+                                        <img src={"http://localhost:3000/public/users/"+e.owner+'/posts/'+e._id+'.png'} alt="" srcset="" />
+                                    </div>
+                        })
+                    }
                 </div> : <CircularProgress style={circularStyle}/>}
             </div>
             {auth === 1 ? null : <Redirect to='/'/>}

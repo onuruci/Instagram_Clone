@@ -10,12 +10,8 @@ import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 import Toolbar from '@material-ui/core/Toolbar';
 import SvgIcon from '@material-ui/core/SvgIcon';
-import Icon from '@material-ui/core/Icon';
-import AddIcon from '@material-ui/icons/Add';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
+import AcUnitIcon from '@material-ui/icons/AcUnit';
 
 import instaLogo from './instalogo.png';
 
@@ -100,6 +96,10 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '100%',
     marginLeft: '30px',
     marginTop: '3px'
+  },
+  noneButton: {
+    backgroundColor: 'white',
+    border: 'none'
   }
 }));
 
@@ -125,6 +125,12 @@ export default function NavBar({currentUserId, currentUserName}) {
     console.log(searchName);
     setSearched(1);
   };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+      window.location.reload();
+    console.log(localStorage.getItem('token'));
+};
 
   return (
     <div className={classes.root}>
@@ -153,12 +159,15 @@ export default function NavBar({currentUserId, currentUserName}) {
                   <HomeIcon fontSize="large" color="action" />
                 </Link>
                 <Link to="/postpicture">
-                  <AddIcon fontSize="large" color="action"></AddIcon>
+                  <AddAPhotoIcon fontSize="large" color="action"></AddAPhotoIcon>
+                </Link>
+                <Link to="7home" onClick={handleLogout}>
+                  < AcUnitIcon fontSize="large" color="action"></AcUnitIcon>
                 </Link>
                 <Link to="/profile">
                 {currentUserId !== '' ? <img src={'http://localhost:3000/public/users/'+currentUserId+'/profile/profile.png'} alt="" srcset="" className={classes.profileIcon}/> : 
                 <img src={noprofile} alt="" srcset="" className={classes.profileIcon}/> }
-                </Link>                
+                </Link>             
             </div>
             
           </Toolbar>

@@ -80,6 +80,7 @@ const UserPage = ({currentUserId,setCurrentUserId,currentUserName,setCurrentUser
     const [profileName, setProfileName] = useState('http://localhost:3000/public/users/6120dff44095e24cacd44e52/profile/profile.png');
     const [userid, setUserId] = useState('0');
     const [posts, setPosts] = useState([]);
+    const [following, setFollowing] = useState(0);
 
     useEffect(() => {
         
@@ -114,6 +115,9 @@ const UserPage = ({currentUserId,setCurrentUserId,currentUserName,setCurrentUser
                 setUserId(res.data.user._id);
                 setPosts(res.data.user.posts);
                 setCurrentUserId(res.data.authData.user._id);
+                if(res.data.user.followers.includes(res.data.authData.user._id)){
+                    setFollowing(1);
+                }
             }
         }
 
@@ -161,9 +165,15 @@ const UserPage = ({currentUserId,setCurrentUserId,currentUserName,setCurrentUser
                             <h1 style={textStyle}>
                                 {profileName}
                             </h1>
-                            <Button variant="contained" color="primary" href="#contained-buttons" style={buttonStyle} onClick={followUser}>
-                                Follow
-                            </Button>
+                            {
+                                following === 0 ?   <Button variant="contained" color="primary" href="#contained-buttons" style={buttonStyle} onClick={followUser}>
+                                                        Follow
+                                                    </Button> :
+                                                    <Button variant="contained" href="#contained-buttons" style={buttonStyle}>
+                                                        Unfollow
+                                                    </Button> 
+                            }
+                            
                         </div>
                         <div style={followStyle}>
                             <h4 style={textStyle}>{postCount} posts</h4>

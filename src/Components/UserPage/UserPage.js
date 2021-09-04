@@ -133,6 +133,20 @@ const UserPage = ({currentUserId,setCurrentUserId,currentUserName,setCurrentUser
         }
     }, [token]);
 
+    function refreshPage(){ 
+        window.location.reload(); 
+    }
+
+    const followUser = async () => {
+        let followMessage = await axios.post("http://localhost:3000/follow/"+userid,{} ,{
+            'headers' : {
+                'Authorization': 'Bearer '+ localStorage.getItem('token')
+            }
+        });
+        console.log(followMessage);
+        refreshPage();
+    }
+
     return(
         <div>
             <NavBar
@@ -147,7 +161,7 @@ const UserPage = ({currentUserId,setCurrentUserId,currentUserName,setCurrentUser
                             <h1 style={textStyle}>
                                 {profileName}
                             </h1>
-                            <Button variant="contained" color="primary" href="#contained-buttons" style={buttonStyle}>
+                            <Button variant="contained" color="primary" href="#contained-buttons" style={buttonStyle} onClick={followUser}>
                                 Follow
                             </Button>
                         </div>

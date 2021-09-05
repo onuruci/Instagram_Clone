@@ -26,6 +26,15 @@ const bodyStyle = {
     height: 'auto'
 }
 
+const loadingDivStyle = {
+    width: '100%',
+    textAlign: 'center'
+}
+
+const loaderStyle = {
+    margin: '400px 0 0 0'
+}
+
 const HomePage = () => {
 
     const [connected, setConnected] = useState(0);
@@ -36,6 +45,7 @@ const HomePage = () => {
     const [userid, setUserId] = useState('');
     const [username, setUsername] = useState('');
     const [arr, setArr] = useState([]);
+    const [componentLoading, setComponentLoading] = useState(0);
  
     useEffect(() => {
         
@@ -64,7 +74,8 @@ const HomePage = () => {
                 setAuth(0);
             }
             else{
-                setConnected(1);
+                setConnected(1)
+                setComponentLoading(1);
             }
         }
         else {
@@ -72,6 +83,14 @@ const HomePage = () => {
             console.log('NO token');
         }
     }, [token]);
+
+    if(componentLoading === 0){
+        return(
+            <div style={loadingDivStyle}>
+                <CircularProgress style={loaderStyle}/>
+            </div>
+        );
+    }
 
     return(
         <div>

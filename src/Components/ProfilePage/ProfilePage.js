@@ -66,6 +66,14 @@ const postContainer = {
     flexWrap: 'wrap', 
 }
 
+const loadingDivStyle = {
+    width: '100%',
+    textAlign: 'center'
+}
+
+const loaderStyle = {
+    margin: '400px 0 0 0'
+}
 
 const ProfilePage = () => {
 
@@ -145,8 +153,8 @@ const ProfilePage = () => {
 
     if(componentLoading === 0){
         return(
-            <div>
-                <CircularProgress />
+            <div style={loadingDivStyle}>
+                <CircularProgress style={loaderStyle}/>
             </div>
         );
     }

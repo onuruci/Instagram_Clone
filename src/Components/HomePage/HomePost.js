@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import LikeComment from "./LikeComment";
 
 const imgStyle={
@@ -8,7 +10,7 @@ const divStyle={
     textAlign: 'center',
     marginTop: '60px',
     width: '520px',
-    margin: '50px auto 0 auto',
+    margin: '50px auto 50px auto',
     border: 'solid',
     borderWidth: '1.2px',
     borderColor: 'lightgrey',
@@ -22,6 +24,10 @@ const profileDiv = {
     display: 'flex'
 }
 
+const nameParDiv = {
+    display: 'flex'
+}
+
 const profileIcon = {
     width: '40px',
     height: '40px',
@@ -31,16 +37,63 @@ const profileIcon = {
     marginBottom: 'auto'
 }
 
-const HomePost = ({postid, userid}) => {
+const textDivStyle = {
+    margin: '-10px 0 50px 15px'
+}
+
+const textStyle = {
+    fontFamily: 'Roboto',
+    fontSize: '15px'
+}
+
+const linkStyle = {
+    color: 'black',
+    style: 'none',
+    textDecoration: 'none'
+}
+
+const linkUserStyle = {
+    color: 'black',
+    style: 'none',
+    textDecoration: 'none',
+    margin: '-20px 0 0 18px'
+}
+
+const paragraphStyle = {
+    fontFamily: 'Roboto',
+    fontSize: '15px',
+    margin: '5px 0 0 15px'
+}
+
+const HomePost = ({post}) => {
     return(
         <div style={divStyle}>
             <div style={profileDiv}>
                 <div>
-                    <img src={'http://localhost:3000/public/users/'+userid+'/profile/profile.png'} alt="" srcset="" style={profileIcon}/>
+                    <Link to={"/user/"+post.owner.username}>
+                    <img src={'http://localhost:3000/public/users/'+post.owner._id+'/profile/profile.png'} alt="" srcset="" style={profileIcon}/>
+                    </Link>
+                </div>
+                <div style={textDivStyle}>
+                    <Link to={"/user/"+post.owner.username} style={linkStyle}>
+                    <h5 style={textStyle}>
+                        {post.owner.username}
+                    </h5>
+                    </Link>
                 </div>
             </div>
-            <img src={"http://localhost:3000/public/users/"+userid+'/posts/'+postid+'.png'} alt="" srcset="" style={imgStyle}/>
+            <img src={"http://localhost:3000/"+post.photo+'.png'} alt="" srcset="" style={imgStyle}/>
             <LikeComment/>
+            <div style={nameParDiv}>
+                <Link to={"/user/"+post.owner.username} style={linkUserStyle}>
+                    <h5 style={textStyle}>
+                        {post.owner.username}
+                    </h5>
+                </Link>
+                <p style={paragraphStyle}>
+                    {post.paragraph}
+                </p>
+            </div>
         </div>
     );
 }

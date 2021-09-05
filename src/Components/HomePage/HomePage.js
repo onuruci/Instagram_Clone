@@ -73,16 +73,6 @@ const HomePage = () => {
         }
     }, [token]);
 
-    const handleClick = async () => {
-
-        
-    };
-
-    const handleLogout = () => {
-        localStorage.removeItem('token');
-        setToken(localStorage.getItem('token'));
-        console.log(localStorage.getItem('token'));
-    };
     return(
         <div>
             <NavBar
@@ -93,7 +83,7 @@ const HomePage = () => {
                     {
                         arr.map(e => {
                             console.log(e);
-                            return <HomePost userid={e.owner} postid={e._id}/>
+                            return <HomePost key={e._id} post={e}/>
                         })
                     }
                 </div> : <CircularProgress style={circularStyle}/>}

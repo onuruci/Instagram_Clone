@@ -1,3 +1,4 @@
+import LikeComment from "./LikeComment";
 
 const imgStyle={
     width: '520px',
@@ -37,9 +38,9 @@ const HomePost = ({postid, userid}) => {
                 <div>
                     <img src={'http://localhost:3000/public/users/'+userid+'/profile/profile.png'} alt="" srcset="" style={profileIcon}/>
                 </div>
-                <h3>{}</h3>
             </div>
             <img src={"http://localhost:3000/public/users/"+userid+'/posts/'+postid+'.png'} alt="" srcset="" style={imgStyle}/>
+            <LikeComment/>
         </div>
     );
 }

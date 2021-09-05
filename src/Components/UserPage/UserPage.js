@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import NavBar from '../Nav/NavBar';
 import Post from './Post';
 import noprofile from './noprofile.png';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const axios = require('axios');
 
@@ -65,6 +66,15 @@ const postContainer = {
     flexWrap: 'wrap', 
 }
 
+const loadingDivStyle = {
+    width: '100%',
+    textAlign: 'center'
+}
+
+const loaderStyle = {
+    margin: '400px 0 0 0'
+}
+
 
 const UserPage = ({currentUserId,setCurrentUserId,currentUserName,setCurrentUserName}) => {
 
@@ -81,6 +91,7 @@ const UserPage = ({currentUserId,setCurrentUserId,currentUserName,setCurrentUser
     const [userid, setUserId] = useState('0');
     const [posts, setPosts] = useState([]);
     const [following, setFollowing] = useState(0);
+    const [componentLoading, setComponentLoading] = useState(0);
 
     useEffect(() => {
         
@@ -129,7 +140,9 @@ const UserPage = ({currentUserId,setCurrentUserId,currentUserName,setCurrentUser
             }
             else{
                 setAuth(1);
-                getUser();
+                getUser().then(() => {
+                    setComponentLoading(1);
+                });
             }
         }
         else {
@@ -149,6 +162,14 @@ const UserPage = ({currentUserId,setCurrentUserId,currentUserName,setCurrentUser
         });
         console.log(followMessage);
         refreshPage();
+    }
+
+    if(componentLoading === 0){
+        return(
+            <div style={loadingDivStyle}>
+                <CircularProgress style={loaderStyle}/>
+            </div>
+        );
     }
 
     return(

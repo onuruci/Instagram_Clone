@@ -31,10 +31,10 @@ const LikeComment = () => {
     return(
         <div style={divStyle}>
             <div style={buttonDivStyle} onClick={handleCick}>
-                <Link style={linkStyle}>
+                <Link style={linkStyle} to="/home">
                     <FavoriteBorderIcon fontSize="large"/>
                 </Link>
-                <Link style={linkStyle}>
+                <Link style={linkStyle} to="/home">
                     <ChatBubbleOutlineIcon fontSize="large"/>
                 </Link>
             </div>

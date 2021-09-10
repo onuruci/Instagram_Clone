@@ -102,7 +102,7 @@ const HomePage = () => {
                     {
                         arr.map(e => {
                             console.log(e);
-                            return <HomePost key={e._id} post={e}/>
+                            return <HomePost key={e._id} post={e} userid={userid}/>
                         })
                     }
                 </div> : <CircularProgress style={circularStyle}/>}

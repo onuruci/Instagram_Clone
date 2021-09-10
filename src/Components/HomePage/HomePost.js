@@ -65,7 +65,7 @@ const paragraphStyle = {
     margin: '5px 0 0 15px'
 }
 
-const HomePost = ({post}) => {
+const HomePost = ({post, userid}) => {
     return(
         <div style={divStyle}>
             <div style={profileDiv}>
@@ -83,7 +83,7 @@ const HomePost = ({post}) => {
                 </div>
             </div>
             <img src={"http://localhost:3000/"+post.photo+'.png'} alt="" srcset="" style={imgStyle}/>
-            <LikeComment/>
+            <LikeComment post={post} userid={userid}/>
             <div style={nameParDiv}>
                 <Link to={"/user/"+post.owner.username} style={linkUserStyle}>
                     <h5 style={textStyle}>

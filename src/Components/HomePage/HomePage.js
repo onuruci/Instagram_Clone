@@ -44,7 +44,7 @@ const HomePage = () => {
 
     const [userid, setUserId] = useState('');
     const [username, setUsername] = useState('');
-    const [arr, setArr] = useState([]);
+    const [arrPosts, setArrPosts] = useState([]);
     const [componentLoading, setComponentLoading] = useState(0);
  
     useEffect(() => {
@@ -62,7 +62,7 @@ const HomePage = () => {
             else {
                 setUserId(res.data.authData.user._id);
                 setUsername(res.data.authData.user.username);
-                setArr(res.data.arr);
+                setArrPosts(res.data.arr);
             }
             
         }
@@ -100,9 +100,9 @@ const HomePage = () => {
             <div style={bodyStyle}>
                 {connected === 1 ? <div style={bodyStyle}>
                     {
-                        arr.map(e => {
-                            console.log(e);
-                            return <HomePost key={e._id} post={e} userid={userid}/>
+                        arrPosts.map(item => {
+                            console.log(item);
+                            return <HomePost key={item._id} post={item} userid={userid}/>
                         })
                     }
                 </div> : <CircularProgress style={circularStyle}/>}

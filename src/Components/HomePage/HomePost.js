@@ -3,6 +3,7 @@ import {useState, useEffect} from 'react';
 import { Link } from "react-router-dom";
 
 import LikeComment from "./LikeComment";
+import CommentDiv from './Comment';
 
 import TextField from '@material-ui/core/TextField';
 
@@ -55,7 +56,7 @@ const textStyle = {
 const textUserStyle = {
     fontFamily: 'Roboto',
     fontSize: '15px',
-    margin: '0 0 0 0'
+    margin: '0 0 0 0',
 }
 
 
@@ -76,7 +77,8 @@ const linkUserStyle = {
 const paragraphStyle = {
     fontFamily: 'Roboto',
     fontSize: '15px',
-    margin: '5px 0 0 15px'
+    margin: '5px 0 0 15px',
+    fontWeight: '200'
 }
 
 const buttonStyle = {
@@ -155,11 +157,7 @@ const HomePost = ({post, userid}) => {
             </div>
             <div>
                 {comments.map(comment => {
-                    return <div key={comment._id}>
-                        <h4>
-                            {comment.paragraph}
-                        </h4>
-                    </div>
+                    return <CommentDiv key={comment._id} comment={comment}/>
                 })}
             </div>
             <div style={nameParDiv}>

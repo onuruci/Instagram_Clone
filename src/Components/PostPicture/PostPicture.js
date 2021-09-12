@@ -133,7 +133,8 @@ const PostPicture = () => {
         <div>
             <NavBar
             currentUserId={currentUserId}
-            currentUserName={currentUserName}/>
+            currentUserName={currentUserName}
+            setAuth={setAuth}/>
             <div style={bodyStyle}>
                 <div style={headerDivStyle}>
                     <h1 style={textStyle}>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import noprofile from './noprofile.png';
 import { Link } from "react-router-dom";
@@ -111,7 +111,7 @@ function HomeIcon(props) {
     );
 }
 
-export default function NavBar({currentUserId, currentUserName}) {
+export default function NavBar({currentUserId, currentUserName, setAuth}) {
   const classes = useStyles();
 
   const [searchName, setSearchName] = useState('');
@@ -128,7 +128,7 @@ export default function NavBar({currentUserId, currentUserName}) {
 
   const handleLogout = () => {
     localStorage.removeItem('token')
-      window.location.reload();
+    setAuth(0);
     console.log(localStorage.getItem('token'));
 };
 
@@ -161,7 +161,7 @@ export default function NavBar({currentUserId, currentUserName}) {
                 <Link to="/postpicture">
                   <AddAPhotoIcon fontSize="large" color="action"></AddAPhotoIcon>
                 </Link>
-                <Link to="7home" onClick={handleLogout}>
+                <Link to="/home" onClick={handleLogout}>
                   < AcUnitIcon fontSize="large" color="action"></AcUnitIcon>
                 </Link>
                 <Link to="/profile">

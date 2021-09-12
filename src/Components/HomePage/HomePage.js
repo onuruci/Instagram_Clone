@@ -72,6 +72,7 @@ const HomePage = () => {
             getData();
             if(err === 1){
                 setAuth(0);
+                setComponentLoading(1);
             }
             else{
                 setConnected(1)
@@ -80,6 +81,7 @@ const HomePage = () => {
         }
         else {
             setAuth(0);
+            setComponentLoading(1);
             console.log('NO token');
         }
     }, [token]);
@@ -96,7 +98,8 @@ const HomePage = () => {
         <div>
             <NavBar
             currentUserId={userid}
-            currentUserName={username}/>
+            currentUserName={username}
+            setAuth={setAuth}/>
             <div style={bodyStyle}>
                 {connected === 1 ? <div style={bodyStyle}>
                     {

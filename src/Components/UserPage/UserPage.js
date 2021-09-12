@@ -137,6 +137,7 @@ const UserPage = ({currentUserId,setCurrentUserId,currentUserName,setCurrentUser
             getData();
             if(err === 1){
                 setAuth(0);
+                setComponentLoading(1);
             }
             else{
                 setAuth(1);
@@ -147,6 +148,7 @@ const UserPage = ({currentUserId,setCurrentUserId,currentUserName,setCurrentUser
         }
         else {
             setAuth(0);
+            setComponentLoading(1);
         }
     }, [token]);
 
@@ -176,7 +178,8 @@ const UserPage = ({currentUserId,setCurrentUserId,currentUserName,setCurrentUser
         <div>
             <NavBar
             currentUserId={currentUserId}
-            currentUserName={currentUserName}/>
+            currentUserName={currentUserName}
+            setAuth={setAuth}/>
             <div style={bodyStyle}>
                 <div style={headStyle}>
                     {userid !== '0' ?  <img src={'http://localhost:3000/public/users/'+userid+'/profile/profile.png'} style={profileImageStyle} alt={noprofile} srcset="" /> :

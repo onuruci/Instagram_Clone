@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+import ProfilePoint from './ProfilePoint';
+
 import noprofile from './noprofile.png';
 import { Link } from "react-router-dom";
 import { Redirect} from "react-router-dom";
@@ -14,6 +16,8 @@ import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import AcUnitIcon from '@material-ui/icons/AcUnit';
 
 import instaLogo from './instalogo.png';
+
+const axios = require('axios');
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -100,6 +104,13 @@ const useStyles = makeStyles((theme) => ({
   noneButton: {
     backgroundColor: 'white',
     border: 'none'
+  },
+  searchResults: {
+    backgroundColor: 'white',
+    position: 'absolute',
+    width: '204px',
+    margin: '5px 0 0 10px',
+    borderRadius: '10px'
   }
 }));
 
@@ -116,14 +127,16 @@ export default function NavBar({currentUserId, currentUserName, setAuth}) {
 
   const [searchName, setSearchName] = useState('');
   const [searched, setSearched] = useState(0);
+  const [searches, setSearches] = useState([]);
  
-  const handleSearchChange = (e) => {
+  const handleSearchChange = async (e) => {
     setSearchName(e.target.value);
   };
 
   const handleSearch = () => {
     console.log(searchName);
     setSearched(1);
+    window.location.assign('/user/'+searchName);
   };
 
   const handleLogout = () => {
@@ -132,6 +145,25 @@ export default function NavBar({currentUserId, currentUserName, setAuth}) {
     console.log(localStorage.getItem('token'));
 };
 
+  const searchRequest = async () => {
+    var res = await axios.post('http://localhost:3000/searchbar',{'search': searchName},{
+        'headers' : {
+            'Authorization': 'Bearer '+ localStorage.getItem('token')
+        }
+      });
+    setSearches(res.data.users);
+    console.log(res);
+  }
+
+  useEffect(() => {
+    if(searchName.length > 0){
+      searchRequest();
+    }
+    else{
+      setSearches([]);
+    }
+  }, [searchName]);
+
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.bar}>
@@ -139,20 +171,29 @@ export default function NavBar({currentUserId, currentUserName, setAuth}) {
             <Link to="/home" className={classes.logo}>
               <img src={instaLogo} alt="" srcset="" className={classes.logo}/>
             </Link>
-            <div className={classes.search}>
-                <div  onClick={handleSearch}>
-                <SearchIcon onClick={handleSearch} className={classes.searchIcon}/>
-                </div>
-                <InputBase
-                placeholder="Search…"
-                classes={{
-                    root: classes.inputRoot,
-                    input: classes.inputInput,
-                }}
-                inputProps={{ 'aria-label': 'search' }}
-                value={searchName}
-                onChange={handleSearchChange}
-                />
+            <div>
+              <form className={classes.search} onSubmit={handleSearch}>
+                  <div  onClick={handleSearch}>
+                  <SearchIcon onClick={handleSearch} className={classes.searchIcon}/>
+                  </div>
+                  <InputBase
+                  placeholder="Search…"
+                  classes={{
+                      root: classes.inputRoot,
+                      input: classes.inputInput,
+                  }}
+                  inputProps={{ 'aria-label': 'search' }}
+                  value={searchName}
+                  onChange={handleSearchChange}
+                  />
+              </form>
+              <div className={classes.searchResults}>
+                {
+                  searches.map(item=>{
+                    return <ProfilePoint user={item}/>
+                  })
+                }
+              </div>
             </div>
             <div className={classes.iconMenu}>
                 <Link to="/home">

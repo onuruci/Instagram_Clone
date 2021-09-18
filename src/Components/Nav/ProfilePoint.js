@@ -38,7 +38,7 @@ const ProfilePoint = ({user}) => {
     const [redirect, setRedirect] = useState(false);
 
     const handleRedirect = () => {
-        window.open('/user/'+user.username);
+        window.location.assign('/user/'+user.username);
     }
 
     return(

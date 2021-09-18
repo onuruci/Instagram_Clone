@@ -63,7 +63,9 @@ const inStyle = {
 
 const postContainer = {
     display: 'flex',
-    flexWrap: 'wrap', 
+    flexWrap: 'wrap',
+    textAlign: 'left',
+    width: '100%',
 }
 
 const loadingDivStyle = {

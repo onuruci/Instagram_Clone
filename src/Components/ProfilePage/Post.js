@@ -7,7 +7,7 @@ const postStyle = {
     height: '293px',
     marginLeft: '25px',
     marginTop: '25px',
-    marginRight: 'auto',
+    marginRight: '0',
     position: 'relative',
 }
 

@@ -167,6 +167,16 @@ const UserPage = ({currentUserId,setCurrentUserId,currentUserName,setCurrentUser
         refreshPage();
     }
 
+    const unfollowUser = async () => {
+        let unfollowMessage = await axios.post("http://localhost:3000/unfollow/"+userid,{} ,{
+            'headers' : {
+                'Authorization': 'Bearer '+ localStorage.getItem('token')
+            }
+        });
+        console.log(unfollowMessage);
+        refreshPage();
+    }
+
     if(componentLoading === 0){
         return(
             <div style={loadingDivStyle}>
@@ -194,7 +204,7 @@ const UserPage = ({currentUserId,setCurrentUserId,currentUserName,setCurrentUser
                                 following === 0 ?   <Button variant="contained" color="primary" href="#contained-buttons" style={buttonStyle} onClick={followUser}>
                                                         Follow
                                                     </Button> :
-                                                    <Button variant="contained" href="#contained-buttons" style={buttonStyle}>
+                                                    <Button variant="contained" href="#contained-buttons" style={buttonStyle} onClick={unfollowUser}>
                                                         Unfollow
                                                     </Button> 
                             }

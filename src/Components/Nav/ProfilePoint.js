@@ -35,8 +35,6 @@ const divStyle = {
 
 const ProfilePoint = ({user}) => {
 
-    const [redirect, setRedirect] = useState(false);
-
     const handleRedirect = () => {
         window.location.assign('/user/'+user.username);
     }

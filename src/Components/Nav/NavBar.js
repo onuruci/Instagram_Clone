@@ -135,8 +135,6 @@ export default function NavBar({currentUserId, currentUserName, setAuth}) {
 
   const handleSearch = () => {
     console.log(searchName);
-    setSearched(1);
-    window.location.assign('/user/'+searchName);
   };
 
   const handleLogout = () => {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { Link } from "react-router-dom";
+import { Link , Redirect} from "react-router-dom";
 import noprofile from './noprofile.png';
 
 const linkStyle = {
@@ -34,10 +34,17 @@ const divStyle = {
 }
 
 const ProfilePoint = ({user}) => {
+
+    const [redirect, setRedirect] = useState(false);
+
+    const handleRedirect = () => {
+        window.open('/user/'+user.username);
+    }
+
     return(
         <div style={divStyle}>
-            <Link to={'/user/'+user.username} style={linkStyle}>
-                <div style={nameParDiv}>
+            <Link style={linkStyle}>
+                <div style={nameParDiv} onClick={handleRedirect}>
                     <img src={'http://localhost:3000/public/users/'+user._id+'/profile/profile.png'} alt="" srcset="" style={profileIcon}/>
                     <h3 style={textStyle}>{user.username}</h3>
                 </div>

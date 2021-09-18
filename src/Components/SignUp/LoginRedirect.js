@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 
 const divStyle = {
@@ -23,9 +24,11 @@ const LoginRedirect = () => {
     return(
         <div style={divStyle}>
             <h3 style={textStyle}>Already have an account ?</h3>
-            <Button style={buttondStyle} variant="contained" color="primary">
-                Login Page
-            </Button>
+            <Link to="/">
+                <Button style={buttondStyle} variant="contained" color="primary">
+                    Login Page
+                </Button>
+            </Link>
         </div>
     )
 }

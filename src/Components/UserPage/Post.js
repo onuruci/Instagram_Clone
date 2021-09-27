@@ -9,6 +9,7 @@ const postStyle = {
     marginTop: '25px',
     marginRight: '0',
     position: 'relative',
+    cursor: 'pointer',
 }
 
 const postImgStyle ={
@@ -55,8 +56,12 @@ const Post = ({userid, post}) => {
         setIsShown(coverStyle);
     }
 
+    const handlePostRedirect = () => {
+        window.location.assign('/post/'+post._id);
+    };
+
     return(
-        <div style={postStyle}
+        <div style={postStyle} onClick={handlePostRedirect}
             key={post._id}
                         onMouseEnter={handleOnHover}
                         onMouseLeave={handleHoverDown}>

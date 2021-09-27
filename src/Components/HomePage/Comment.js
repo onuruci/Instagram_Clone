@@ -5,7 +5,7 @@ const divStyle = {
     display: 'flex',
     height: '28px',
     textAlign: 'left',
-    margin: '0 0 0 0'
+    margin: '0 0 0 0',
 }
 
 const thinFont = {
